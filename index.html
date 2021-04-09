@@ -214,6 +214,52 @@
 
         init();
 
+        // function နှစ်ခုလိုချင်တယ်
+        // ပထမ တစ်ခုက English Date ထည့်ပေးလိုက်ရင် Myanmar Date အပြည့်အစုံ ပြန်ပေးတာမျိုး
+
+        function engToMm(year, month, date){
+            let mmDate = {
+                year: 0,
+                month: '',
+                moonPhase : '',
+                date: '',
+                day:'',
+                original : {}
+            };
+            let j=w2j(year, month, date); //get julian day number
+            let M=j2m(j);
+            mmDate.year = myNumbers(M.my,"my");
+            mmDate.month = monthsMM[M.mm];
+            mmDate.moonPhase = mpDefinations[M.mp];
+            mmDate.date = myNumbers(M.fd,"my");
+            mmDate.day = weekDay[M.wd];
+            mmDate.original = M;
+            return mmDate;
+        }
+
+        console.log('test engToMm');
+        console.log(engToMm(2021,4,10));
+
+        function mmToEng(year, month, monthType, moonPhase, date){
+            let engDate = {
+                year: 0,
+                month: '',
+                date: '',
+                original: {}
+            }
+            let jDayFromMm = m2j(year,month,monthType,moonPhase,date);
+            let westernDate = j2w(jDayFromMm);
+            engDate.year = westernDate.y;
+            engDate.month = monthsEN[westernDate.m];
+            engDate.date = westernDate.d;
+            engDate.original = westernDate;
+            return engDate;
+        }
+
+        
+        console.log('test mmToEng');
+        console.log(mmToEng(1382,12,0, 2, 14));
+
     </script>
 </body>
 
