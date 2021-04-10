@@ -64,6 +64,26 @@
         a {
             text-decoration: none;
         }
+
+        span{
+            color: blue;
+            border: 2px solid blue;
+            padding: 5px;
+            margin: 5px;
+            display: inline-block;
+            border-radius: 5%;
+        }
+        span.nagahle_body, span.mahabote_body, span.nakhat_body{
+            border: none;
+        }
+        span.nagahle, span.mahabote, span.nakhat{
+            border: none;
+            font-weight: bold;
+        }
+        #myanmarDataSpan{
+            display: inline-block;
+            border: none;
+        }
     </style>
 </head>
 
@@ -75,6 +95,23 @@
         <input type="date" id="englishDateInput" required />
         <br>
         <span id="myanmarDataSpan"></span>
+        <span class="sabbath">ဉပုဒ်နေ့</span>
+        <span class="sabbatheve">အဖိတ်နေ့</span>
+        <span class="yatyaza">ရက်ရာဇာ</span>
+        <span class="pyathada">ပြဿဒါး</span>
+        <span class="thamanyo">သမားညို</span>
+        <span class="amyeittasote">အမြိတ္တစုတ်</span>
+        <span class="warameittugyi">ဝါရမိတ္တုကြီး</span>
+        <span class="warameittunge">ဝါရမိတ္တုငယ်</span>
+        <span class="yatpote">ရက်ပုပ်</span>
+        <span class="thamaphyu">သမားဖြူ</span>
+        <span class="nagapor">နဂါးပေါ်</span>
+        <span class="yatyotema">ရက်ယုတ်မာ</span>
+        <span class="mahayatkyan">မဟာရက်ကြမ်း</span>
+        <span class="shanyat">ရှမ်းရက်</span>
+        <span class="nagahle_body">နဂါးခေါင်း <span class="nagahle"></span> ဘက်သို့လှည့်</span>
+        <span class="mahabote_body">မဟာဘုတ်အရ <span class="mahabote"></span> ဖွားဖြစ်သည်</span>
+        <span class="nakhat_body">နက္ခတ်အရ<span class="nakhat"></span> နက္ခတ်</span>
         <br>
     </form>
 
@@ -137,8 +174,52 @@
             ဖတ်နိုင်ပါသည်။</li>
     </ul>
     <script>
+        var englishDateInput = document.getElementById("englishDateInput");
+        var myanmarDateInput = document.getElementById("myanmarDateInput");
+        var sabbathSpan = document.getElementsByClassName("sabbath");
+        var sabbatheveSpan = document.getElementsByClassName("sabbatheve");
+        var yatyazaSpan = document.getElementsByClassName("yatyaza");
+        var pyathadaSpan = document.getElementsByClassName("pyathada");
+        var thamanyoSpan = document.getElementsByClassName("thamanyo");
+        var amyeittasoteSpan = document.getElementsByClassName("amyeittasote");
+        var warameittugyiSpan = document.getElementsByClassName("warameittugyi");
+        var warameittungeSpan = document.getElementsByClassName("warameittunge");
+        var yatpoteSpan = document.getElementsByClassName("yatpote");
+        var thamaphyuSpan = document.getElementsByClassName("thamaphyu");
+        var nagaporSpan = document.getElementsByClassName("nagapor");
+        var mahayatkyanSpan = document.getElementsByClassName("mahayatkyan");
+        var yatyotemaSpan = document.getElementsByClassName("yatyotema");
+        var shanyatSpan = document.getElementsByClassName("shanyat");
+        var nagahleBodySpan = document.getElementsByClassName("nagahle_body");
+        var nagahleSpan = document.getElementsByClassName("nagahle");
+        var mahaboteBodySpan = document.getElementsByClassName("mahabote_body");
+        var mahaboteSpan = document.getElementsByClassName("mahabote");
+        var nakhatBodySpan = document.getElementsByClassName("nakhat_body");
+        var nakhatSpan = document.getElementsByClassName("nakhat");
+        
+        function hideAll(){
+            sabbathSpan[0].style.display = "none";
+            sabbatheveSpan[0].style.display = "none";
+            yatyazaSpan[0].style.display = "none";
+            pyathadaSpan[0].style.display = "none";
+            thamanyoSpan[0].style.display = "none";
+            amyeittasoteSpan[0].style.display = "none";
+            warameittugyiSpan[0].style.display = "none";
+            warameittungeSpan[0].style.display = "none";
+            yatpoteSpan[0].style.display = "none";
+            thamaphyuSpan[0].style.display = "none";
+            nagaporSpan[0].style.display = "none";
+            mahayatkyanSpan[0].style.display = "none";
+            yatyotemaSpan[0].style.display = "none";
+            shanyatSpan[0].style.display = "none";
+            // nagahleBodySpan[0].style.display = "none";
+            // nagahleSpan[0].style.display = "none";
+            // mahaboteBodySpan[0].style.display = "none";
+            // mahaboteSpan[0].style.display = "none";
+            // nakhatBodySpan[0].style.display = "none";
+            // nakhatSpan[0].style.display = "none";
+        }
 
-        console.log('hello world');
         document.getElementById("myanmarMoonPhaseInput").addEventListener("change", (event) => {
             console.log("myanmarMoonPhaseInput->onChange");
             let mmMoonPhase = parseInt(document.getElementById("myanmarMoonPhaseInput").value);
@@ -166,66 +247,38 @@
             console.log(westernDate);
             document.getElementById("englishDataSpan").textContent = "" + westernDate.y + "-" + monthsEN[westernDate.m] + "-" + westernDate.d;
         });
-        document.getElementById("englishDateInput").addEventListener("change", () => {
-            console.log('date input change');
-            console.log(document.getElementById("englishDateInput").value);
+        function engDateOnChange(){
             let dateObj = new Date(document.getElementById("englishDateInput").value);
-            console.log(dateObj);
-            console.log(dateObj.getFullYear());
-
             let year = dateObj.getFullYear();
             let month = dateObj.getMonth() + 1;
             let date = dateObj.getDate();
-
-            console.log(dateObj.getFullYear() + "/" + dateObj.getMonth() + 1 + "/" + dateObj.getDate());
-
-            console.log(engToMm(year, month, date));
-            let j = w2j(year, month, date); //get julian day number
-
-            let M = j2m(j);
-            console.log(M);
-            // mp = 0 meaning လဆန်း
-            // mp = 1 meaning လပြည့်
-            // mp = 2 meaning လဆုတ်
-            // mp = 3 meaning လကွယ်
-            // document.getElementById("myanmarDataSpan").textContent = document.getElementById("englishDateInput").value ;
-            document.getElementById("myanmarDataSpan").textContent = myNumbers(M.my, "my") + " ခုနှစ် " + monthsMM[M.mm] + " " + mpDefinations[M.mp] + " " + myNumbers(M.fd, "my") + " ရက်၊ " + weekDay[M.wd] + " နေ့";
-        });
+            let mmDate = engToMm(year, month, date);
+            document.getElementById("myanmarDataSpan").textContent = mmDate.year + " ခုနှစ် " + mmDate.month + " " +  mmDate.moonPhase + " " +  mmDate.date + " ရက်၊ " +  mmDate.day + " နေ့";
+            // hide all
+            hideAll();
+            if(mmDate.sabbath != "") sabbathSpan[0].style.display = "inline-block";
+            if(mmDate.sabbatheve != "") sabbatheveSpan[0].style.display = "inline-block";
+            if(mmDate.yatyaza != "") yatyazaSpan[0].style.display = "inline-block";
+            if(mmDate.pyathada != "") pyathadaSpan[0].style.display = "inline-block";
+            if(mmDate.thamanyo != "") thamanyoSpan[0].style.display = "inline-block";
+            if(mmDate.amyeittasote != "") amyeittasoteSpan[0].style.display = "inline-block";
+            if(mmDate.warameittugyi != "") warameittugyiSpan[0].style.display = "inline-block";
+            if(mmDate.warameittunge != "") warameittungeSpan[0].style.display = "inline-block";
+            if(mmDate.yatpote != "") yatpoteSpan[0].style.display = "inline-block";
+            if(mmDate.thamaphyu != "") thamaphyuSpan[0].style.display = "inline-block";
+            if(mmDate.nagapor != "") nagaporSpan[0].style.display = "inline-block";
+            if(mmDate.yatyotema != "") yatyotemaSpan[0].style.display = "inline-block";
+            if(mmDate.mahayatkyan != "") mahayatkyanSpan[0].style.display = "inline-block";
+            // if(mmDate.nagahle != "") nagahleSpan[0].style.display = "inline-block";
+            nagahleSpan[0].textContent = mmDate.nagahle;
+            mahaboteSpan[0].textContent = mmDate.mahabote;
+            nakhatSpan[0].textContent = mmDate.nakhat;
+        }
+        document.getElementById("englishDateInput").addEventListener("change", engDateOnChange);
 
         function init() {
-            let dateObj = new Date();
-            document.getElementById("englishDateInput").valueAsDate = dateObj;
-
-            let year = dateObj.getFullYear();
-            let month = dateObj.getMonth() + 1;
-            let date = dateObj.getDate();
-            console.log(dateObj.getFullYear() + "/" + dateObj.getMonth() + 1 + "/" + dateObj.getDate());
-            let j = w2j(year, month, date); //get julian day number
-
-            let M = j2m(j);
-            console.log(M);
-            document.getElementById("myanmarDataSpan").textContent = myNumbers(M.my, "my") + " ခုနှစ်၊ " + monthsMM[M.mm] + " " + mpDefinations[M.mp] + " " + myNumbers(M.fd, "my") + " ရက်၊" + weekDay[M.wd] + " နေ့";
-
-            // document.getElementById("myanmarDataSpan").textContent = toMyanmar(dateObj);
-
-            let mmYear = M.my;// int
-            let mmMonth = M.mm; // string
-            let mmMonthType = M.mmt; // int
-            let mmMoonPhase = M.mp; // int
-            let mmFortnightDay = M.fd;
-            console.log(M);
-            let jDayFromMm = m2j(mmYear, mmMonth, mmMonthType, mmMoonPhase, mmFortnightDay);
-            //let jDayFromMm = m2j(M.my,M.mm,M.mmt,M.mp,M.fd);
-            console.log(jDayFromMm);
-            console.log('jDayFromMm ' + jDayFromMm);
-            let westernDate = j2w(jDayFromMm);
-            console.log(westernDate);
-
-            console.log('--------------');
-            //let jDayFromMm2 = m2j(1382, 12, 0, 2, 13);
-            let jDayFromMm2 = m2j(1355, 3, 0, 2, 9);
-            console.log(j2w(jDayFromMm2));
-
+            document.getElementById("englishDateInput").valueAsDate  = new Date();
+            engDateOnChange();
         }
 
         init();
@@ -293,9 +346,7 @@
             mmDate.original = M;
             return mmDate;
         }
-
-        console.log('test engToMm');
-        console.log(engToMm(2021, 4, 10));
+        
 
         function mmToEng(year, month, monthType, moonPhase, date) {
             let engDate = {
@@ -363,11 +414,6 @@
                 nagahle: nagahle, mahabote: mahabote, nakhat: nakhat
             };
         }
-
-
-        console.log('test mmToEng');
-        console.log(mmToEng(1382, 12, 0, 2, 14));
-
     </script>
 </body>
 
